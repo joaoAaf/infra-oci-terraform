@@ -1,3 +1,7 @@
+data "template_file" "cloud-init" {
+  template = file("./scripts/cloud-init.yaml")
+}
+
 resource "oci_core_instance" "apps-vm-1" {
   # Required
   availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
@@ -19,6 +23,7 @@ resource "oci_core_instance" "apps-vm-1" {
   }
   metadata = {
     ssh_authorized_keys = file("./private/ssh_authorized_keys")
+    user_data            = "${base64encode(data.template_file.cloud-init.rendered)}"
   }
   preserve_boot_volume = false
 }
