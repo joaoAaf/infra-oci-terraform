@@ -23,7 +23,7 @@ resource "oci_core_instance" "apps-vm-1" {
   }
   metadata = {
     ssh_authorized_keys = file("./private/ssh_authorized_keys")
-    user_data            = "${base64encode(data.template_file.cloud-init.rendered)}"
+    user_data            = base64encode(data.template_file.cloud-init.rendered)
   }
   preserve_boot_volume = false
 }
