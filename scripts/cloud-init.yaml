@@ -10,7 +10,9 @@ packages:
   - nano
   - git
 runcmd:
-  - curl -fsSL https://get.docker.com -o get-docker.sh
-  - sh get-docker.sh
+  - curl -fsSL https://get.docker.com | sh
+  - curl -fsSL https://tailscale.com/install.sh | sh
+  - tailscale up --authkey ${tailscale_key}
   - docker -v >> /etc/motd
   - docker compose version >> /etc/motd
+  - tailscale version >> /etc/motd
