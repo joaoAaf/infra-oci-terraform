@@ -1,44 +1,17 @@
-# Outputs availability domains
-
-output "all-availability-domains-in-tenancy" {
-  value = data.oci_identity_availability_domains.ads.availability_domains
+# Retorna o nome da instância da vm-01
+output "name_vm-01" {
+  description = "Nome da vm-01: "
+  value = oci_core_instance.vm-01.display_name
 }
 
-# Outputs compartments
-
-output "apps-compartment-name" {
-  value = oci_identity_compartment.apps-compartment.name
+# Retorna o IP privado da instância da vm-01
+output "private-ip_vm-01" {
+  description = "IP Privado: "
+  value = oci_core_instance.vm-01.private_ip
 }
 
-output "apps-compartment-OCID" {
-  value = oci_identity_compartment.apps-compartment.id
-}
-
-output "netw-compartment-name" {
-  value = oci_identity_compartment.apps-netw-compartment.name
-}
-
-output "netw-compartment-OCID" {
-  value = oci_identity_compartment.apps-netw-compartment.id
-}
-
-output "vms-compartment-name" {
-  value = oci_identity_compartment.apps-vms-compartment.name
-}
-
-output "vms-compartment-OCID" {
-  value = oci_identity_compartment.apps-vms-compartment.id
-}
-
-# Outputs vcn module
-
-output "vcn_id" {
-  description = "OCID of the VCN that is created"
-  value = module.vcn.vcn_id
-}
-
-# Outputs compute instance
-
-output "public-ip-for-compute-instance" {
-  value = oci_core_instance.apps-vm-1.public_ip
+# Retorna o IP público da instância da vm-01
+output "public-ip_vm-01" {
+  description = "IP Público: "
+  value = oci_core_instance.vm-01.public_ip
 }
