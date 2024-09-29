@@ -1,6 +1,6 @@
 # Define um arquivo de template para o Cloud-init utilizando o arquivo cloud-init.yaml
 data "template_file" "cloud-init" {
-  template = file("./scripts/cloud-init.yaml")
+  template = file("../scripts/cloud-init.yaml")
   # Variáveis a serem substituídas no template
   vars = {
     tailscale_key = var.tailscale_key
@@ -36,7 +36,7 @@ resource "oci_core_instance" "vm-01" {
   }
   # Dados passados para a instância após sua criação
   metadata = {
-    ssh_authorized_keys = file("./private/ssh_authorized_keys")                # Define as chaves SSH autorizadas para acesso à instância
+    ssh_authorized_keys = file("../private/ssh_authorized_keys")                # Define as chaves SSH autorizadas para acesso à instância
     user_data           = base64encode(data.template_file.cloud-init.rendered) # Define o conteúdo do arquivo cloud-init codificado em Base64
   }
   preserve_boot_volume = false # Define se o volume de inicialização deve ser preservado
