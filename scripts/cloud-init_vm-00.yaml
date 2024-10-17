@@ -8,11 +8,11 @@ system_info:
     groups: [docker]
 packages:
   - nano
-  - git
+  - iputils-ping
 runcmd:
   - curl -fsSL https://get.docker.com | sh
-  - curl -fsSL https://tailscale.com/install.sh | sh
-  - tailscale up --authkey ${tailscale_key}
   - docker -v >> /etc/motd
   - docker compose version >> /etc/motd
+  - curl -fsSL https://tailscale.com/install.sh | sh
+  - tailscale up --authkey ${tailscale_key}
   - tailscale version >> /etc/motd
