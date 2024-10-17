@@ -23,11 +23,12 @@ O intuito é subir em uma destas instancias um banco de dados PostgreSQL, que po
     * Region;
     * Caminho da chave privada (PEM), gerada no passo 4;
     * Chave pública SSH, gerada no passo 3;
-    * Auth Key do Tailscale, gerada no passo 5.
-7. Clonar este repositório com `git clone`;
-8. Criar o diretório `private` na pasta raiz do projeto;
-9. Criar o arquivo `vars.tfvar`, conforme o modelo `example/vars.tfvar.example`, o preencher com os dados reunidos no passo 5 e coloca-lo no diretório `private`;
-10. Criar um arquivo `ssh_authorized_keys`, conforme o modelo `example/ssh_authorized_keys.example`, contendo a chave pública criada no passo 3 e, eventualmente, qualquer outra chave pública das maquinas que poderão ter acesso a sua instancia na OCI, e coloca-lo no diretório `private`.
+    * Auth Keys do Tailscale, gerada no passo 5.
+7. Criar um arquivo `config` no diretório `~/.oci`, conforme o modelo `example/config.example`, e o preencher com os dados reunidos no passo 6;
+8. Clonar este repositório com `git clone`;
+9. Criar o diretório `private` na pasta raiz do projeto;
+10. No diretório `private`, criar o arquivo `vars.tfvar`, conforme o modelo `example/vars.tfvar.example`, e o preencher com os dados reunidos no passo 6;
+11. Criar um arquivo `ssh_authorized_keys`, conforme o modelo `example/ssh_authorized_keys.example`, contendo a chave pública criada no passo 3 e, eventualmente, qualquer outra chave pública das maquinas que poderão ter acesso a sua instancia na OCI, e coloca-lo no diretório `private`.
 
 Obs: Para os passos 4 e 6, consulte o seguinte link da documentação oficial da OCI: [Configurar o OCI Terraform](https://docs.oracle.com/pt-br/iaas/developer-tutorials/tutorials/tf-provider/01-summary.htm).
 

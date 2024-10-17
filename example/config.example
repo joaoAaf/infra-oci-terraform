@@ -1,0 +1,6 @@
+[DEFAULT]
+user=<Digite seu OCID do usuário aqui (exemplo: ocid1.user.oc1..aaaaaaaaaaa)>
+fingerprint=<Digite o fingerprint da chave pública do usuário (exemplo: aa:bb:cc:dd:ee:ff:gg:hh:ii:jj:kk:ll:mm:nn:oo:pp)>
+tenancy=<Digite seu OCID do tenancy aqui (exemplo: ocid1.tenancy.oc1..aaaaaaaaaaa)>
+region=<Digite a região onde a infraestrutura será criada (exemplo: us-phoenix-1)>
+key_file=<Digite o caminho para a chave privada do usuário (exemplo: ~/.oci/oci_key.pem)>

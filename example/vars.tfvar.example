@@ -2,14 +2,13 @@
 # Variáveis obrigatórias:
 # --------------------------------------------------------------------------------
 tenancy_ocid=<Digite seu OCID do tenancy aqui (exemplo: "ocid1.tenancy.oc1..aaaaaaaaaaa")>
-user_ocid=<Digite seu OCID do usuário aqui (exemplo: "ocid1.user.oc1..aaaaaaaaaaa")>
-private_key_path=<Digite o caminho para a chave privada do usuário (exemplo: "~/.oci/oci_key.pem")>
-fingerprint=<Digite o fingerprint da chave pública do usuário (exemplo: "aa:bb:cc:dd:ee:ff:gg:hh:ii:jj:kk:ll:mm:nn:oo:pp")>
 region=<Digite a região onde a infraestrutura será criada (exemplo: "us-phoenix-1")>
-tailscale_key=<Digite a chave Tailscale (exemplo: "tskey-auth-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")> 
+tailscale_key1=<Digite a chave Tailscale (exemplo: "tskey-auth-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")>
+tailscale_key2=<Digite a chave Tailscale (exemplo: "tskey-auth-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")> 
 # --------------------------------------------------------------------------------
 # Variáveis opcionais:
 # --------------------------------------------------------------------------------
 #vcn_name=<Digite o nome da VCN aqui (exemplo: "my-vcn")>
 #vcn_dns_label=<Digite o label DNS da VCN aqui (exemplo: "myvcndns")>
+#vm-00_name=<Digite o nome da vm-00 aqui (exemplo: "vm-00")>
 #vm-01_name=<Digite o nome da vm-01 aqui (exemplo: "vm-01")>
