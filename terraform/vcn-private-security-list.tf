@@ -19,19 +19,6 @@ resource "oci_core_security_list" "private-security-list" {
   # Regras para o tráfego de entrada
   ingress_security_rules {
     stateless   = false
-    source      = "10.0.0.0/16" # Define a faixa IP autorizada para ingressar
-    source_type = "CIDR_BLOCK"
-    # TCP protocol 6: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-    protocol = "6" # Apenas tráfego TCP
-    # Define as opções do TCP
-    tcp_options {
-      # Define o intervalo de portas TCP permitidas
-      min = 22
-      max = 22
-    }
-  }
-  ingress_security_rules {
-    stateless   = false
     source      = "0.0.0.0/0"
     source_type = "CIDR_BLOCK"
     # ICMP protocol 1: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
@@ -49,6 +36,29 @@ resource "oci_core_security_list" "private-security-list" {
     protocol    = "1"
     icmp_options {
       type = 3 # Define o tipo de mensagem ICMP permitida (destination Unreachable)
+    }
+  }
+  ingress_security_rules {
+    stateless   = false
+    source      = "10.0.2.0/24"
+    source_type = "CIDR_BLOCK"
+    protocol    = "1"
+    icmp_options {
+      type = 8 # echo message
+      code = 0
+    }
+  }
+  ingress_security_rules {
+    stateless   = false
+    source      = "10.0.2.0/24" # Define a faixa IP autorizada para ingressar
+    source_type = "CIDR_BLOCK"
+    # TCP protocol 6: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
+    protocol = "6" # Apenas tráfego TCP
+    # Define as opções do TCP
+    tcp_options {
+      # Define o intervalo de portas TCP permitidas
+      min = 5432 # Porta Posgresql
+      max = 5432
     }
   }
 }
