@@ -1,0 +1,30 @@
+volumes:
+  pgdata:
+
+networks:
+  pgnet:
+    name: pgnet
+    driver: bridge
+
+services:
+  postgresql:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: changeme
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      # o período de carência durante o qual o Compose não considerará as falhas de verificação de saúde (padrão 0s).
+      # No entanto, se a verificação de saúde for bem-sucedida, o recipiente será marcado como saudável e o período de carência termina cedo.
+      start_period: 1m
+      # start_interval : 5s # o período entre os exames de saúde durante o período de carência (padrão 5s ).
+      interval: 5s # o período entre os exames de saúde (padrão 30s).
+      # timeout: 30s # o tempo dado ao comando a ser concluído (padrão 30s).
+      retries: 10 # o número de falhas consecutivas antes de ser considerado insalubre (padrão 3).
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - pgnet
+    
