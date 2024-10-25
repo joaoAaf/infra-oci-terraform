@@ -1,5 +1,6 @@
 volumes:
   pgdata:
+    name: pgdata
 
 networks:
   pgnet:
@@ -11,6 +12,7 @@ services:
     image: postgres
     restart: unless-stopped
     environment:
+      POSTGRES_USER: ubuntu
       POSTGRES_PASSWORD: changeme
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]

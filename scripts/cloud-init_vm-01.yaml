@@ -16,3 +16,5 @@ runcmd:
   - curl -fsSL https://tailscale.com/install.sh | sh
   - tailscale up --authkey ${tailscale_key}
   - tailscale version >> /etc/motd
+  - curl https://raw.githubusercontent.com/joaoAaf/infra-oci-terraform/refs/heads/main/scripts/docker-compose_vm-01.yml > /home/ubuntu/docker-compose.yml
+  - docker compose -f /home/ubuntu/docker-compose.yml up -d
