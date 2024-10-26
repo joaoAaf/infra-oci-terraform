@@ -19,27 +19,6 @@ resource "oci_core_security_list" "private-security-list" {
   # Regras para o tráfego de entrada
   ingress_security_rules {
     stateless   = false
-    source      = "0.0.0.0/0"
-    source_type = "CIDR_BLOCK"
-    # ICMP protocol 1: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
-    protocol = "1" # Apenas tráfego ICMP
-    # ICMP type and code see: https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml
-    icmp_options {
-      type = 3 # Define o tipo de mensagem ICMP permitida (destination Unreachable)
-      code = 4 # Define o código de mensagem ICMP permitido (Fragmentation Needed and Don't Fragment was set)
-    }
-  }
-  ingress_security_rules {
-    stateless   = false
-    source      = "10.0.0.0/16"
-    source_type = "CIDR_BLOCK"
-    protocol    = "1"
-    icmp_options {
-      type = 3 # Define o tipo de mensagem ICMP permitida (destination Unreachable)
-    }
-  }
-  ingress_security_rules {
-    stateless   = false
     source      = "10.0.2.0/24"
     source_type = "CIDR_BLOCK"
     protocol    = "1"
