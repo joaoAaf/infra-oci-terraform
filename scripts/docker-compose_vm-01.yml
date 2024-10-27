@@ -9,10 +9,11 @@ networks:
 
 services:
   postgresql:
+    container_name: postgresql
     image: postgres
     restart: unless-stopped
+    user: postgres
     environment:
-      POSTGRES_USER: ubuntu
       POSTGRES_PASSWORD: changeme
     healthcheck:
       test: ["CMD-SHELL", "pg_isready"]
