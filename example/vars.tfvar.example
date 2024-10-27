@@ -5,9 +5,11 @@ tenancy_ocid=<Digite seu OCID do tenancy aqui (exemplo: "ocid1.tenancy.oc1..aaaa
 region=<Digite a região onde a infraestrutura será criada (exemplo: "us-phoenix-1")>
 tailscale_key1=<Digite a chave Tailscale (exemplo: "tskey-auth-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")>
 tailscale_key2=<Digite a chave Tailscale (exemplo: "tskey-auth-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")> 
+ssh_pub_key1=<Digite a chave sua pública SSH (exemplo: "ssh-rsa AAAA...")>
 # --------------------------------------------------------------------------------
 # Variáveis opcionais:
 # --------------------------------------------------------------------------------
+#ssh_pub_key2=<Digite a chave sua pública SSH (exemplo: "ssh-rsa AAAA...")>
 #vcn_name=<Digite o nome da VCN aqui (exemplo: "my-vcn")>
 #vcn_dns_label=<Digite o label DNS da VCN aqui (exemplo: "myvcndns")>
 #vm-00_name=<Digite o nome da vm-00 aqui (exemplo: "vm-00")>

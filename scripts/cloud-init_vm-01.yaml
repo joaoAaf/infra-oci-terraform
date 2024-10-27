@@ -3,9 +3,17 @@ package_update: true
 package_upgrade: true
 groups:
   - docker
-system_info:
-  default_user:
-    groups: [docker]
+users:
+  - default
+  - name: dba
+    gecos: DBA
+    primary_group: dba
+    groups: docker, users, admin
+    sudo: 'ALL=(ALL) NOPASSWD:ALL'
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ${ssh_pub_key1}
+      - ${ssh_pub_key2}
 packages:
   - nano
   - iputils-ping
@@ -16,5 +24,7 @@ runcmd:
   - curl -fsSL https://tailscale.com/install.sh | sh
   - tailscale up --authkey ${tailscale_key}
   - tailscale version >> /etc/motd
-  - curl https://raw.githubusercontent.com/joaoAaf/infra-oci-terraform/refs/heads/main/scripts/docker-compose_vm-01.yml > /home/ubuntu/docker-compose.yml
-  - docker compose -f /home/ubuntu/docker-compose.yml up -d
+  - curl https://raw.githubusercontent.com/joaoAaf/infra-oci-terraform/refs/heads/main/scripts/docker-compose_vm-01.yml > /home/dba/docker-compose.yml
+  - chown dba:dba /home/dba/docker-compose.yml
+  - chmod 644 /home/dba/docker-compose.yml
+  - docker compose -f /home/dba/docker-compose.yml up -d

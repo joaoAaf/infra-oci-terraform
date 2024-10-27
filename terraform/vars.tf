@@ -13,6 +13,15 @@ variable "tailscale_key2" {
   description = "Auth key do Tailscale"
   sensitive   = true
 }
+variable "ssh_pub_key1" {
+  description = "Chave Pública SSH"
+  sensitive   = true
+}
+variable "ssh_pub_key2" {
+  description = "Chave Pública SSH"
+  default = ""
+  sensitive   = true
+}
 variable "vcn_name" {
   description = "Nome da VCN"
   default     = "vcn-01"
