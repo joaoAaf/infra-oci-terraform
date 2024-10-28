@@ -1,7 +1,7 @@
 ## Projeto de Infraestrutura na OCI com Terraform
 
 #### **AINDA ESTA EM CONSTRUÇÃO!**
-**-->No momento só está sendo criada uma instância de VM, apenas com Docker e Tailscale<--**
+**-->No momento só está sendo criada uma instância de VM, apenas com Docker, Tailscale e um container com o banco de dados PostgreSQL.<--**
 
 ### **Sobre o projeto:**
 
@@ -28,7 +28,6 @@ O intuito é subir em uma destas instancias um banco de dados PostgreSQL, que po
 8. Clonar este repositório com `git clone`;
 9. Criar o diretório `private` na pasta raiz do projeto;
 10. No diretório `private`, criar o arquivo `vars.tfvar`, conforme o modelo `example/vars.tfvar.example`, e o preencher com os dados reunidos no passo 6;
-11. Criar um arquivo `ssh_authorized_keys`, conforme o modelo `example/ssh_authorized_keys.example`, contendo a chave pública criada no passo 3 e, eventualmente, qualquer outra chave pública das maquinas que poderão ter acesso a sua instancia na OCI, e coloca-lo no diretório `private`.
 
 Obs: Para os passos 4 e 6, consulte o seguinte link da documentação oficial da OCI: [Configurar o OCI Terraform](https://docs.oracle.com/pt-br/iaas/developer-tutorials/tutorials/tf-provider/01-summary.htm).
 
@@ -39,17 +38,16 @@ Obs: Para os passos 4 e 6, consulte o seguinte link da documentação oficial da
 3. Execute `terraform init` para inicializar o Terraform;
 4. Execute `terraform plan -var-file=../private/vars.tfvar` para visualizar a estrutura que será criada;
 5. Execute `terraform apply -var-file=../private/vars.tfvar -auto-approve` para aplicar as alterações na sua conta OCI;
-6. Para acessar a instância criada via ssh pelo IP público, basta executar `ssh ubuntu@<ip_da_instancia>`, substituindo `<ip_da_instancia>` pelo IP público fornecido no output do terraform. (esta opção só estará disponível temporariamente, até a conclusão da configuração das instâncias com o Tailscale);
-7. Para acessar a instância criada via ssh pela rede do Tailscale, será necessário seguir os seguintes passos:
+6. Para acessar a instância criada via ssh pela rede do Tailscale, será necessário seguir os seguintes passos:
     * Executar o comando `tailscale up` para se conectar à rede do Tailscale;
-    * Executar o passo  6, substituindo o `<ip_da_instancia>` pelo nome instância retornado no output do terraform;
+    * executar `ssh dba@<nome_da_instancia>`, substituindo `<nome_da_instancia>` pelo nome instância retornado no output do terraform;
     * Caso obtenha algum erro verique no console do Tailscale, ou execute o comando `tailscale status`, para verificar se sua maquina e a instância criada estão conectados à rede ou se o nome da instância está correto. (Caso já tenha criado e destruído a infraestrutura, possivelmente o nome da instância estará diferente do que foi mostrado no output do terraform)
 
 Obs¹: Para destruir toda a infraestrutura criada, execute `terraform destroy -var-file=../private/vars.tfvar -auto-approve`.
 
 Obs²: Após completada a criação dos recursos, pode demorar alguns minutos até que o cloud-init termine de configurar as instâncias.
 
-Obs³: Caso queira fazer uma configuração personalizada para a máquina, basta alterar o arquivo `cloud-init.yml` na pasta `scripts`, destruir e reconstruir a infraestrutura com o passo 5.
+Obs³: Caso queira fazer uma configuração personalizada para a máquina, basta alterar o arquivo `cloud-init.yml` na pasta `scripts` e reconstruir a infraestrutura com o passo 5.
 
 ### **Licença:**
 
