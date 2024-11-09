@@ -14,3 +14,6 @@ ssh_pub_key1=<Digite a chave sua pública SSH (exemplo: "ssh-rsa AAAA...")>
 #vcn_dns_label=<Digite o label DNS da VCN aqui (exemplo: "myvcndns")>
 #vm-00_name=<Digite o nome da vm-00 aqui (exemplo: "vm-00")>
 #vm-01_name=<Digite o nome da vm-01 aqui (exemplo: "vm-01")>
+#timezone=<Digite o timezone que deseja utilizar (exemplo: "Etc/UTC")>
+#webdav_username=<Digite o nome do usuario para o servidor WebDav (exemplo: "username")>
+#webdav_password=<Digite a senha do usuario para o servidor WebDav (exemplo: "changeme")>
