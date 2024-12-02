@@ -22,6 +22,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - pgbackup:/pgbackup
+      - /home/dba/pgbackup.sh:/usr/local/bin/pgbackup.sh
     ports:
       - 5432:5432
     environment:
