@@ -1,13 +1,26 @@
 ## Projeto de Infraestrutura na OCI com Terraform
 
-#### **AINDA ESTA EM CONSTRUÇÃO!**
-**-->No momento só está sendo criada uma instância de VM, apenas com Docker, Tailscale e um container com o banco de dados PostgreSQL.<--**
+### **AINDA ESTA EM CONSTRUÇÃO!**
+### **Atualizações:**
+- Definição da VCN (Virtual Cloud Network);
+- Definição de subnet privada;
+- Definição de listas de segurança para controle de tráfego;
+- Definição da uma VM com Ubuntu 22.04 LTS (aarch64), que receberá o banco de dados;
+- Elaboração de arquivo `docker-compose.yml` para subir os seguintes containers:
+  * Banco de dados PostgreSQL;
+  * Servidor WebDAV baseado em Nginx, que receberá os backups do banco de dados.
+- Elaboração de arquivo `cloud-init.yaml` para personalização da VM do banco de dados, contendo:
+  * Instalação e configuração dos pacotes Docker, Tailscale, Cron e outros necessários;
+  * Personalização do Usuário padrão da instancia;
+  * Criação de script para backup do banco de dados;
+  * Configuração do Cron para automatização dos backups do banco de dados;
+  * Inicialização dos containers definidos no arquivo `docker-compose.yml`.
 
 ### **Sobre o projeto:**
 
 Este projeto cria uma infraestrutura simples no Oracle Cloud Infrastructure (OCI) com Terraform, inicialmente com duas instâncias de VMs com o sistema operacional Ubuntu 22.04 LTS (aarch64), acessível via SSH e configurada com Docker, Tailscale e outros pacotes essenciais.
 
-O intuito é subir em uma destas instancias um banco de dados PostgreSQL, que poderá ser acessado via Tailscale, sem a necessidade de permitir o acesso público, e na outra uma aplicação web que expõe uma API RESTful.
+O intuito é subir em uma destas instancias um banco de dados PostgreSQL com backup automatizado, que poderá ser acessado via Tailscale, sem a necessidade de permitir o acesso público, e na outra uma aplicação web que expõe uma API RESTful.
 
 ### **Pre-requisitos:**
 
@@ -24,10 +37,10 @@ O intuito é subir em uma destas instancias um banco de dados PostgreSQL, que po
     * Caminho da chave privada (PEM), gerada no passo 4;
     * Chave pública SSH, gerada no passo 3;
     * Auth Keys do Tailscale, gerada no passo 5.
-7. Criar um arquivo `config` no diretório `~/.oci`, conforme o modelo `example/config.example`, e o preencher com os dados reunidos no passo 6;
+7. Criar um arquivo `config` no diretório `~/.oci`, conforme o modelo `example/config.example`, e preenchê-lo com os dados reunidos no passo 6;
 8. Clonar este repositório com `git clone`;
 9. Criar o diretório `private` na pasta raiz do projeto;
-10. No diretório `private`, criar o arquivo `vars.tfvar`, conforme o modelo `example/vars.tfvar.example`, e o preencher com os dados reunidos no passo 6;
+10. No diretório `private`, criar o arquivo `vars.tfvar`, conforme o modelo `example/vars.tfvar.example`, preenchê-lo com os dados reunidos no passo 6 e demais informados no modelo;
 
 Obs: Para os passos 4 e 6, consulte o seguinte link da documentação oficial da OCI: [Configurar o OCI Terraform](https://docs.oracle.com/pt-br/iaas/developer-tutorials/tutorials/tf-provider/01-summary.htm).
 
@@ -51,7 +64,7 @@ Obs³: Caso queira fazer uma configuração personalizada para a máquina, basta
 
 ### **Licença:**
 
-Este projeto está sob a licença BSD 3-Clause License - veja o arquivo [LICENSE](https://github.com/joaoAaf/infra-oci-terraform/blob/main/LICENSE) para mais detalhes.
+Este projeto está sob a licença MIT - veja o arquivo [LICENSE](https://github.com/joaoAaf/infra-oci-terraform/blob/main/LICENSE) para mais detalhes.
 
 ### **Contato e Redes Sociais:**
 
