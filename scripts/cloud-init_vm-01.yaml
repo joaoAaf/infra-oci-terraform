@@ -14,17 +14,34 @@ users:
     ssh_authorized_keys:
       - ${ssh_pub_key1}
       - ${ssh_pub_key2}
+timezone: ${timezone}
 packages:
   - nano
   - iputils-ping
+  - cron
+write_files:
+  - content: |
+      #!/bin/bash
+      pg_dumpall -c -U postgres | gzip -9 > /pgbackup/dump_$(date +%Y-%m-%d"_"%H_%M_%S).sql.gz
+    path: /home/dba/pgbackup.sh
+    permissions: '0670'
+    defer: true
+  - content: |
+      0 0 * * * dba sh -c "docker exec postgresql pgbackup.sh"
+    path: /etc/cron.d/pgbackup
+    defer: true
 runcmd:
   - curl -fsSL https://get.docker.com | sh
-  - docker -v >> /etc/motd
-  - docker compose version >> /etc/motd
   - curl -fsSL https://tailscale.com/install.sh | sh
-  - tailscale up --authkey ${tailscale_key}
-  - tailscale version >> /etc/motd
-  - curl https://raw.githubusercontent.com/joaoAaf/infra-oci-terraform/refs/heads/main/scripts/docker-compose_vm-01.yml > /home/dba/docker-compose.yml
+  - tailscale up --authkey ${tailscale_key} --advertise-routes=10.0.1.0/24
+  - export PUID=$(id -u dba)
+  - export PGID=$(id -g dba)
+  - export TZ=${timezone}
+  - export WEBDAV_USERNAME=${webdav_username}
+  - export WEBDAV_PASSWORD=${webdav_password}
+  - groupadd -g 999 postgres
+  - chown dba:postgres /home/dba/pgbackup.sh
+  - https://raw.githubusercontent.com/joaoAaf/infra-oci-terraform/refs/heads/main/scripts/docker-compose_vm-01.yml > /home/dba/docker-compose.yml
   - chown dba:dba /home/dba/docker-compose.yml
-  - chmod 644 /home/dba/docker-compose.yml
+  - chmod 660 /home/dba/docker-compose.yml
   - docker compose -f /home/dba/docker-compose.yml up -d

@@ -38,3 +38,17 @@ variable "vm-01_name" {
   description = "Nome da vm-01"
   default     = "vm-01"
 }
+variable "timezone" {
+  description = "Fuso Horário"
+  default = "Etc/UTC"
+}
+variable "webdav_username" {
+  description = "Usuario servidor WebDav"
+  default = "username"
+  sensitive = true
+}
+variable "webdav_password" {
+  description = "Usuario servidor WebDav"
+  default = "changeme"
+  sensitive = true
+}

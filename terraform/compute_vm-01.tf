@@ -6,6 +6,9 @@ data "template_file" "cloud-init_vm-01" {
     tailscale_key = var.tailscale_key2
     ssh_pub_key1  = var.ssh_pub_key1
     ssh_pub_key2  = var.ssh_pub_key2
+    timezone = var.timezone
+    webdav_username = var.webdav_username
+    webdav_password = var.webdav_password
   }
 }
 
