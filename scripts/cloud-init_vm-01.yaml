@@ -21,6 +21,13 @@ packages:
   - cron
 write_files:
   - content: |
+      ${docker_compose_content}
+    encoding: base64
+    path: /home/dba/docker-compose.yml
+    owner: dba:dba
+    permissions: '0660'
+    defer: true
+  - content: |
       #!/bin/bash
       pg_dumpall -c -U postgres | gzip -9 > /pgbackup/dump_$(date +%Y-%m-%d"_"%H_%M_%S).sql.gz
     path: /home/dba/pgbackup.sh
@@ -41,7 +48,4 @@ runcmd:
   - export WEBDAV_PASSWORD=${webdav_password}
   - groupadd -g 999 postgres
   - chown dba:postgres /home/dba/pgbackup.sh
-  - https://raw.githubusercontent.com/joaoAaf/infra-oci-terraform/refs/heads/main/scripts/docker-compose_vm-01.yml > /home/dba/docker-compose.yml
-  - chown dba:dba /home/dba/docker-compose.yml
-  - chmod 660 /home/dba/docker-compose.yml
   - docker compose -f /home/dba/docker-compose.yml up -d
