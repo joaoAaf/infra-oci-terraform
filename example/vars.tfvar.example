@@ -17,3 +17,4 @@ ssh_pub_key1=<Digite a chave sua pública SSH (exemplo: "ssh-rsa AAAA...")>
 #timezone=<Digite o timezone que deseja utilizar (exemplo: "Etc/UTC")>
 #webdav_username=<Digite o nome do usuario para o servidor WebDav (exemplo: "username")>
 #webdav_password=<Digite a senha do usuario para o servidor WebDav (exemplo: "changeme")>
+#pg_pass=<Digite a senha do usuário postgres (exemplo: "changeme")>

@@ -40,12 +40,13 @@ write_files:
 runcmd:
   - curl -fsSL https://get.docker.com | sh
   - curl -fsSL https://tailscale.com/install.sh | sh
-  - tailscale up --authkey ${tailscale_key} --advertise-routes=10.0.1.0/24
+  - tailscale up --authkey ${tailscale_key}
   - export PUID=$(id -u dba)
   - export PGID=$(id -g dba)
   - export TZ=${timezone}
   - export WEBDAV_USERNAME=${webdav_username}
   - export WEBDAV_PASSWORD=${webdav_password}
+  - export PG_PASS=${pg_pass}
   - groupadd -g 999 postgres
   - chown dba:postgres /home/dba/pgbackup.sh
   - docker compose -f /home/dba/docker-compose.yml up -d

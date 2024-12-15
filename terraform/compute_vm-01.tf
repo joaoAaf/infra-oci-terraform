@@ -9,6 +9,7 @@ data "template_file" "cloud-init_vm-01" {
     timezone = var.timezone
     webdav_username = var.webdav_username
     webdav_password = var.webdav_password
+    pg_pass = var.pg_pass
     docker_compose_content = base64encode(file("../scripts/docker-compose_vm-01.yml"))
   }
 }

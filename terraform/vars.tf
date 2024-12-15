@@ -48,7 +48,12 @@ variable "webdav_username" {
   sensitive = true
 }
 variable "webdav_password" {
-  description = "Usuario servidor WebDav"
+  description = "Senha servidor WebDav"
+  default = "changeme"
+  sensitive = true
+}
+variable "pg_pass" {
+  description = "Senha do PostgreSQL"
   default = "changeme"
   sensitive = true
 }
